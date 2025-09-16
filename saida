@@ -28,10 +28,9 @@
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<p><strong>Nome:</strong> " . htmlspecialchars($_POST["nome"]) . "</p>";
-                echo "<p><strong>Nome do personagem e classe:</strong> " . htmlspecialchars($_POST["nome"]) . "</p>";
                 echo "<p><strong>Email:</strong> " . htmlspecialchars($_POST["email"]) . "</p>";
 
-                if (!empty($_POST["Sua opinião"])) {
+                if (!empty($_POST["mensagem"])) {
                     echo "<p><strong>Mensagem:</strong> " . nl2br(htmlspecialchars($_POST["mensagem"])) . "</p>";
                 }
 
