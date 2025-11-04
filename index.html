@@ -22,21 +22,61 @@
     </header>
 
     <!-- Conteúdo principal -->
-    <main>
-        <h1>Bem-vindo à Locadora de Veículos</h1>
-        <p>Encontre o carro ideal para sua viagem, trabalho ou lazer.</p>
+   <main>
+  <h1>Bem-vindo à Locadora de Veículos</h1>
+  <p>Encontre o carro ideal para sua viagem, trabalho ou lazer.</p>
 
-        <div class="carros">
-            <img src="Perola.jpg" alt="Perola Negra">
+  <div id="conteudo" class="conteudo-scroll">
+    <p>Carregando conteúdo...</p>
+  </div>
+</main>
 
-            <img src="Horlandes voador.webp"
-                alt="Holandês Voador">
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzSdMgvLOSfseszLBYft8alYLCZKxy0uaAj9kX0yUhF2h9NqXerXmWapPAU90fJ9qehVA/exec"
+async function carregarConteudo() {
+  const container = document.getElementById('conteudo');
+  container.innerHTML = "<p>Carregando conteúdo...</p>";
 
-            <img src="TTT.webp"
-                alt="HMS Endeavour">
-                
-        </div>
-    </main>
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const dados = await res.json();
+    container.innerHTML = '';
+
+    dados.forEach(item => {
+      const bloco = document.createElement('div');
+      bloco.className = 'bloco-item';
+
+      const titulo = document.createElement('h2');
+      titulo.textContent = item.Título || '';
+      bloco.appendChild(titulo);
+
+      const descricao = document.createElement('p');
+      descricao.textContent = item.Descrição || '';
+      bloco.appendChild(descricao);
+
+      if (item.Url && item.Url.startsWith('http')) {
+        if (item.Url.match(/\.(jpg|jpeg|png|gif|webp)$/i) || item.Url.includes('unsplash')) {
+          const img = document.createElement('img');
+          img.src = item.Url;
+          img.alt = item.Título || 'Imagem';
+          bloco.appendChild(img);
+        } else {
+          const link = document.createElement('a');
+          link.href = item.Url;
+          link.textContent = 'Ver mais';
+          bloco.appendChild(link);
+        }
+      }
+
+      container.appendChild(bloco);
+    });
+  } catch (err) {
+    container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
+  }
+}
+
+carregarConteudo();
+</script>
 
     <!-- Rodapé -->
     <footer>
