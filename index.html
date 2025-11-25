@@ -83,6 +83,12 @@ async function carregarConteudo() {
     bloco.appendChild(link);
   }
 }
+container.appendChild(bloco);
+        });
+      } catch (err) {
+        container.innerHTML = "<p>Erro ao carregar dados: " + err.message + "</p>";
+      }
+    }        
 carregarConteudo();
 </script>
 
