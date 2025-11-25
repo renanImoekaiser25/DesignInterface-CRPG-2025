@@ -41,7 +41,7 @@ async function carregarConteudo() {
   container.innerHTML = "<p>Carregando conteúdo...</p>";
 
   try {
-    const res = await fetch(https://script.google.com/macros/s/AKfycby_vRqaKsjQxkKKkf7Bi4a-x2DTKqUt5U-OQ7VPB1g1lgkArpcATXFlu6q29HAhwqbk-g/exec);
+    const res = await fetch(SCRIPT_URL);
     const dados = await res.json();
     container.innerHTML = '';
 
